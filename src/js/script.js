@@ -86,6 +86,7 @@
       thisProduct.data = data;
 
       thisProduct.renderInMenu();
+      thisProduct.getElements();
       thisProduct.initAccordion();
       console.log('new product:', thisProduct);
     }
@@ -102,13 +103,23 @@
       menuContainer.appendChild(thisProduct.element);
     }
 
+    getElements(){
+      const thisProduct = this;
+
+      thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
+      thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
+      thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
+      thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
+      thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      console.log('price', thisProduct.priceElem);
+    }
+
     initAccordion(){
       const thisProduct = this;
+
       /* find the clickable trigger (the element that should react to clicking) */
-      thisProduct.trigger = thisProduct.element.querySelector(select.menuProduct.clickable);
-      console.log(thisProduct);
       /* START: click event listener to trigger */
-      thisProduct.trigger.addEventListener('click', function(event){
+      thisProduct.accordionTrigger.addEventListener('click', function(event){
         console.log('clicked');
         /* prevent default action for event */
         event.preventDefault();
