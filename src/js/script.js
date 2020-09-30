@@ -113,6 +113,7 @@
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     }
 
     initAccordion(){
@@ -121,7 +122,6 @@
       /* find the clickable trigger (the element that should react to clicking) */
       /* START: click event listener to trigger */
       thisProduct.accordionTrigger.addEventListener('click', function(event){
-        console.log('clicked');
         /* prevent default action for event */
         event.preventDefault();
         /* toggle active class on element of thisProduct */
@@ -144,7 +144,6 @@
 
     initOrderForm(){
       const thisProduct = this;
-      console.log('initOrderForm');
       thisProduct.form.addEventListener('submit', function(event){
         event.preventDefault();
         thisProduct.processOrder();
@@ -201,6 +200,15 @@
             price -= option.price;
             console.log('priceMinus-', price);
           }
+          /*START IF: for image*/
+          if (optionSelected){
+            thisProduct.imageWrapper.classList.toggle(classNames.menuProduct.imageVisible);
+          } else {
+            thisProduct.imageWrapper.classList.remove(classNames.menuProduct.imageVisible);
+          }
+          console.log('imageWrapper:', thisProduct.imageWrapper);
+          /*END IF: for image*/
+
           /* END ELSE IF: if option is not selected and option is default */
         }
         /* END LOOP: for each optionId in param.options */
