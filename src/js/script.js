@@ -181,7 +181,7 @@
 
           /* save the element in param.options with key optionId as const option */
           const option = param.options[optionId];
-          console.log('option', option);
+          console.log('opt',option);
 
           const optionSelected = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1;
           /* START IF: if option is selected and option is not default */
@@ -189,7 +189,6 @@
 
             /* add price of option to variable price */
             price += option.price;
-            console.log('price+', price);
 
           /* END IF: if option is selected and option is not default */
           }
@@ -198,15 +197,18 @@
 
             /* deduct price of option from price */
             price -= option.price;
-            console.log('priceMinus-', price);
           }
           /*START IF: for image*/
+          const image = thisProduct.imageWrapper.querySelector('img.active');
+          console.log('image!', image);
+
           if (optionSelected){
-            thisProduct.imageWrapper.classList.toggle(classNames.menuProduct.imageVisible);
+            for (let picture in thisProduct.imageWrapper){
+              const activeImage = thisProduct.imageWrapper[picture];
+            }
           } else {
-            thisProduct.imageWrapper.classList.remove(classNames.menuProduct.imageVisible);
+
           }
-          console.log('imageWrapper:', thisProduct.imageWrapper);
           /*END IF: for image*/
 
           /* END ELSE IF: if option is not selected and option is default */
@@ -217,7 +219,6 @@
 
       /* set the contents of thisProduct.priceElem to be the value of variable price */
       thisProduct.priceElem.innerHTML = price;
-      console.log('price=', thisProduct.priceElem);
     }
 
 
