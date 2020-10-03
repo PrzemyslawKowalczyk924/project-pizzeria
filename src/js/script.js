@@ -50,6 +50,21 @@
     menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
   };
 
+  class AmountWidget{
+    constructor(element){
+      const thisWidget = this;
+
+      console.log('AmountWidget', thisWidget);
+      console.log('constructor arguments', element);
+    }
+
+    initAmountWidget(){
+      const thisProduct = this;
+
+      thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+    }
+  }
+
   const app = {
     initMenu: function(){
       const thisApp = this;
@@ -74,7 +89,9 @@
       console.log('settings:', settings);
       console.log('templates:', templates);
       thisApp.initData();
+      console.log('initData', thisApp.initData());
       thisApp.initMenu();
+      console.log('initMenu', thisApp.initMenu());
     },
   };
 
@@ -89,8 +106,10 @@
       thisProduct.getElements();
       thisProduct.initAccordion();
       thisProduct.initOrderForm();
+      thisProduct.initAmountWidget();
+      console.log('initAmountWidget()', thisProduct.initAmountWidget);
       thisProduct.processOrder();
-      console.log('new product:', thisProduct);
+      //console.log('new product:', thisProduct);
     }
 
     renderInMenu(){
@@ -114,6 +133,8 @@
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
       thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
+      thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
+      console.log('amountWidgetElem', thisProduct.amountWidgetElem);
     }
 
     initAccordion(){
@@ -199,8 +220,10 @@
           }
           /*START IF: for image*/
           const image = thisProduct.imageWrapper.querySelectorAll('.' + paramId + '-' + optionId);
+          console.log('image', image);
 
           if (optionSelected){
+            /*START LOOP: for image*/
             for (let picture of image){
               picture.classList.add(classNames.menuProduct.imageVisible);
             }
@@ -208,6 +231,7 @@
             for (let picture of image){
               picture.classList.remove(classNames.menuProduct.imageVisible);
             }
+            /*END LOOP: for image*/
           }
           /*END IF: for image*/
 
@@ -220,8 +244,6 @@
       /* set the contents of thisProduct.priceElem to be the value of variable price */
       thisProduct.priceElem.innerHTML = price;
     }
-
-
   }
 
   app.init();
