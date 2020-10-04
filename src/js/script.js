@@ -54,14 +54,62 @@
     constructor(element){
       const thisWidget = this;
 
+      thisWidget.getElements(element);
+      thisWidget.value = settings.amountWidget.defaultValue;
+      /*deleted input: thisWidget.input.value from setValue*/
+      thisWidget.setValue(thisWidget.value);
+      thisWidget.initActions(element);
+
+      console.log('initAction', thisWidget.initActions);
       console.log('AmountWidget', thisWidget);
       console.log('constructor arguments', element);
     }
 
-    initAmountWidget(){
-      const thisProduct = this;
+    getElements(element){
+      const thisWidget = this;
 
-      thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+      thisWidget.element = element;
+      thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input);
+      thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
+      thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
+    }
+
+    setValue(value){
+      const thisWidget = this;
+
+      const newValue = parseInt(value);
+
+      /*TO DO: Add validation*/
+      if(newValue != settings.amountWidget.defaultValue && newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax || newValue == 1){
+        thisWidget.value = newValue;
+        thisWidget.announce();
+      }
+
+      thisWidget.input.value = thisWidget.value;
+    }
+
+    initActions(){
+      const thisWidget = this;
+      thisWidget.input.addEventListener('change', function(event){
+        event.preventDefault();
+        thisWidget.setValue(thisWidget.input.value);
+      });
+      thisWidget.linkDecrease.addEventListener('click', function(event){
+        event.preventDefault();
+        thisWidget.setValue(thisWidget.value -1);
+      });
+      console.log('linkDecrease', thisWidget.linkDecrease);
+      thisWidget.linkIncrease.addEventListener('click', function(event){
+        event.preventDefault();
+        thisWidget.setValue(thisWidget.value +1);
+      });
+      console.log('linkInscrease', thisWidget.linkIncrease);
+    }
+
+    announce(){
+      const thisWidget = this;
+      const event = new Event('updated');
+      thisWidget.element.dispatchEvent(event);
     }
   }
 
@@ -89,9 +137,9 @@
       console.log('settings:', settings);
       console.log('templates:', templates);
       thisApp.initData();
-      console.log('initData', thisApp.initData());
+      console.log('initData', thisApp.initData);
       thisApp.initMenu();
-      console.log('initMenu', thisApp.initMenu());
+      console.log('initMenu', thisApp.initMenu);
     },
   };
 
@@ -107,9 +155,7 @@
       thisProduct.initAccordion();
       thisProduct.initOrderForm();
       thisProduct.initAmountWidget();
-      console.log('initAmountWidget()', thisProduct.initAmountWidget);
       thisProduct.processOrder();
-      //console.log('new product:', thisProduct);
     }
 
     renderInMenu(){
@@ -134,7 +180,6 @@
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
       thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
       thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
-      console.log('amountWidgetElem', thisProduct.amountWidgetElem);
     }
 
     initAccordion(){
@@ -177,6 +222,16 @@
       }
 
       thisProduct.cartButton.addEventListener('click', function(event){
+        event.preventDefault();
+        thisProduct.processOrder();
+      });
+    }
+
+    initAmountWidget(){
+      const thisProduct = this;
+
+      thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+      thisProduct.amountWidgetElem.addEventListener('updated', function(event){
         event.preventDefault();
         thisProduct.processOrder();
       });
@@ -242,6 +297,8 @@
       /* END LOOP: for each paramId in thisProduct.data.params */
 
       /* set the contents of thisProduct.priceElem to be the value of variable price */
+      /*Multiplay price by amount*/
+      price *= thisProduct.amountWidget.value;
       thisProduct.priceElem.innerHTML = price;
     }
   }
