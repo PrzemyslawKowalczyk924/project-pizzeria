@@ -124,3 +124,21 @@
   }
 
 }
+
+/* MEDIA */
+
+@media (max-width: 767px) and (max-width: 991px) {
+
+  .cart {
+    max-width: 40%;
+    height: 70%;
+  }
+
+  .cart__summary {
+    text-transform: lowercase;
+  }
+  .cart__total-price {
+    text-align: center;
+    display: grid;
+  }
+}
