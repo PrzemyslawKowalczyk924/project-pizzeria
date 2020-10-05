@@ -129,18 +129,17 @@
 /* MEDIA */
 
 @media (max-width: 767px) and (max-width: 991px) {
-
   .product__wrapper {
     flex: 1;
     flex-direction: column-reverse;
   }
+
   .product__order {
     width: unset;
     display: flex;
   }
+  
   .product__params {
     margin-right: 25px;
   }
-
-
 }
