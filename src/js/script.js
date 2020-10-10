@@ -425,6 +425,10 @@
       console.log('totalNumber', thisCart.totalNumber);
       console.log('subtotlPrice', thisCart.subtotalPrice);
       console.log('totalPrice', thisCart.totalPrice);
+      /*Make my own cindition statment for nulling totalNumber*/
+      if (thisCart.totalNumber == 0){
+        thisCart.totalPrice = 0;
+      }
 
       for(let key of thisCart.renderTotalsKeys){
         for(let elem of thisCart.dom[key]){
@@ -435,7 +439,6 @@
 
     remove(cartProduct){
       const thisCart = this;
-      //const index = thisCart.products.index[cartProduct];
       const index = thisCart.products.indexOf(cartProduct);
 
       thisCart.products.splice(index, 1);
@@ -493,7 +496,7 @@
         },
       });
 
-      this.CartProduct.dom.wrapper.dispatchEvent(event);
+      thisCartProduct.dom.wrapper.dispatchEvent(event);
     }
 
     initActions(){
@@ -504,8 +507,8 @@
       });
       thisCartProduct.dom.remove.addEventListener('click', function(event){
         event.preventDefault();
-        thisCartProduct.dom.wrapper.remove();
-        console.log('remove', thisCartProduct.dom.wrapper.remove);
+        thisCartProduct.remove();
+        console.log('remove', thisCartProduct.remove);
       });
     }
   }
