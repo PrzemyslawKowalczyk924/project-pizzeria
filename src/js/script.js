@@ -421,14 +421,8 @@
         thisCart.totalNumber += product.amount;
       }
 
-      thisCart.totalPrice = thisCart.subtotalPrice + thisCart.deliveryFee;
-      console.log('totalNumber', thisCart.totalNumber);
-      console.log('subtotlPrice', thisCart.subtotalPrice);
-      console.log('totalPrice', thisCart.totalPrice);
-      /*Make my own cindition statment for nulling totalNumber*/
-      if (thisCart.totalNumber == 0){
-        thisCart.totalPrice = 0;
-      }
+      /*condition statment for nulling totalPrice*/
+      thisCart.totalPrice = (thisCart.totalNumber == 0) ? 0 : thisCart.subtotalPrice + thisCart.deliveryFee;
 
       for(let key of thisCart.renderTotalsKeys){
         for(let elem of thisCart.dom[key]){
