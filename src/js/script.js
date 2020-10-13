@@ -481,7 +481,7 @@
       };
       for(let product of thisCart.products){
         let productData = product.getData();
-        payload.products += productData;
+        payload.products.push(productData);
         console.log('payloadtoggle', payload.products);
       }
 
