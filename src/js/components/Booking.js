@@ -22,6 +22,7 @@ class Booking {
     thisBooking.dom.wrapper = generatedHTML;
     /* save to thisBooking.dom.peopleAmount single element found in wrapper and equoal to select.booking.peopleAmount */
     thisBooking.dom.peopleAmount = element.querySelector(select.booking.peopleAmount);
+    console.log('people', thisBooking.dom.peopleAmount);
     /* same as in peopleAmount do the same to hoursAmount */
     thisBooking.dom.hoursAmount = element.querySelector(select.booking.hoursAmount);
   }
