@@ -19,12 +19,13 @@ class Booking {
     /* save to thisBooking.dom wrapper equoal to render() argument 'element' */
     thisBooking.dom.wrapper = element;
     /* content of wrapper generate to HTML, by using template */
-    thisBooking.dom.wrapper = generatedHTML;
+    thisBooking.dom.wrapper.innerHTML = generatedHTML;
+    console.log('domWraper', thisBooking.dom.wrapper);
     /* save to thisBooking.dom.peopleAmount single element found in wrapper and equoal to select.booking.peopleAmount */
-    thisBooking.dom.peopleAmount = element.querySelector(select.booking.peopleAmount);
+    thisBooking.dom.peopleAmount = thisBooking.dom.wrapper.querySelector(select.booking.peopleAmount);
     console.log('people', thisBooking.dom.peopleAmount);
     /* same as in peopleAmount do the same to hoursAmount */
-    thisBooking.dom.hoursAmount = element.querySelector(select.booking.hoursAmount);
+    thisBooking.dom.hoursAmount = thisBooking.dom.wrapper.querySelector(select.booking.hoursAmount);
   }
 
   initWidgets(){
