@@ -8,6 +8,9 @@ class AmountWidget extends BaseWidget{
 
     thisWidget.getElements(element);
     thisWidget.initActions();
+
+    //console.log('AmountWidget', thisWidget);
+    //console.log('constructor arguments', element);
   }
 
   getElements(){
@@ -32,16 +35,18 @@ class AmountWidget extends BaseWidget{
 
   initActions(){
     const thisWidget = this;
+    thisWidget.value = null; //MY CODE ADDED FOR 1 value of Widget at start
     thisWidget.dom.input.addEventListener('change', function(){
+      //thisWidget.setValue(thisWidget.dom.input.value);
       thisWidget.value = thisWidget.dom.input.value;
     });
     thisWidget.dom.linkDecrease.addEventListener('click', function(event){
       event.preventDefault();
-      thisWidget.value = thisWidget.value -1;
+      thisWidget.setValue(thisWidget.value -1);
     });
     thisWidget.dom.linkIncrease.addEventListener('click', function(event){
       event.preventDefault();
-      thisWidget.value = thisWidget.value +1;
+      thisWidget.setValue(thisWidget.value +1);
     });
   }
 }
