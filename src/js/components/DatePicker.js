@@ -32,7 +32,7 @@ class DatePicker extends BaseWidget {
       'disable': [
         function(date) {
           // return true to disable
-          return (date.getDay() === 0 || date.getDay() === 6);
+          return (date.getDay() === 1);
         }
       ],
       'locale': {
