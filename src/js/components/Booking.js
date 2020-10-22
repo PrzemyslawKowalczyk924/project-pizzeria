@@ -107,8 +107,6 @@ class Booking {
 
     const startHour = utils.hourToNumber(hour);
 
-
-
     for(let hourBlock = startHour; hourBlock < startHour + duration; hourBlock += 0.5){
       //console.log('loop', hourBlock);
 
@@ -138,6 +136,12 @@ class Booking {
 
     for(let table of thisBooking.dom.tables){
       let tableId = table.getAttribute(settings.booking.tableIdAttribute);
+
+      table.addEventListener('click', function(event){
+        event.preventDefault();
+        thisBooking.tableSelected = data-move;
+      });
+
       if(!isNaN(tableId)){
         tableId = parseInt(tableId);
       }

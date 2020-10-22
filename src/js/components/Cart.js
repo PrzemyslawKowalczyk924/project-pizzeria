@@ -89,6 +89,7 @@ class Cart {
     cartProduct.dom.wrapper.remove();
     thisCart.update();
   }
+  
   sendOrder(){
     const thisCart = this;
     const url = settings.db.url + '/' + settings.db.order;
