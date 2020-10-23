@@ -139,7 +139,8 @@ class Booking {
 
       table.addEventListener('click', function(event){
         event.preventDefault();
-        thisBooking.tableSelected = data-move;
+        thisBooking.tableSelected = table.getAttribute('data-move');
+        console.log('data-move', thisBooking.tableSelected);
       });
 
       if(!isNaN(tableId)){
