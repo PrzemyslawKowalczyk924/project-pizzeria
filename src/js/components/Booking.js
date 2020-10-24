@@ -147,8 +147,24 @@ class Booking {
       'ppl': parseInt(thisBooking.dom.peopleAmount.value),
       'starters': [],
       'phone': parseInt(thisBooking.dom.phone.value),
-      'email': thisBooking.dom.email.value
+      'email': thisBooking.dom.email.value,
     };
+
+    fetch(url)
+      .then(function(rawResponse){
+        return rawResponse.json();
+      })
+      .then(function(parsedResponse){
+        console.log('parsedResponse', parsedResponse);
+
+        /* save parsedReposne as thisApp.data.products */
+        reservation.response = reservation.parsedResponse;
+        console.log('response', reservation.response);
+        /* execute initMenu method */
+        thisBooking.getData(reservation.response);
+      });
+
+    //console.log('thisApp.data', JSON.stringify(thisApp.data));
   }
 
   updateDOM(){
@@ -207,6 +223,8 @@ class Booking {
     thisBooking.dom.hourPicker = thisBooking.dom.wrapper.querySelector(select.widgets.hourPicker.wrapper);
 
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
+    thisBooking.dom.email = thisBooking.dom.wrapper.querySelector(select.cart.address);
+    thisBooking.dom.phone = thisBooking.dom.wrapper.querySelector(select.cart.phone);
   }
 
   initWidgets(){
