@@ -10,6 +10,8 @@ class Booking {
     thisBooking.render(element);
     thisBooking.initWidgets();
     thisBooking.getData();
+    thisBooking.bookTable();
+    thisBooking.sendOrder();
   }
 
   getData(){
@@ -97,7 +99,6 @@ class Booking {
     thisBooking.updateDOM();
   }
 
-
   makeBooked(date, hour, duration, table){
     const thisBooking = this;
 
@@ -116,6 +117,38 @@ class Booking {
 
       thisBooking.booked[date][hourBlock].push(table);
     }
+  }
+
+  bookTable(){
+    const thisBooking = this;
+
+    for(let table of thisBooking.dom.tables){
+      table.addEventListener('click', function(event){
+        const thisBooking = this;
+
+        event.preventDefault();
+        table.classList.toggle(classNames.booking.tableBooked);
+        thisBooking.tableSelected = table.getAttribute(settings.booking.tableIdAttribute);
+        console.log('data-move', thisBooking.tableSelected);
+      });
+    }
+  }
+
+  sendOrder(){
+    const thisBooking = this;
+
+    const url = settings.db.url + '/' + settings.db.booking;
+
+    const reservation = {
+      'date': thisBooking.datePicker.value,
+      'hour': thisBooking.hourPicker.value,
+      'table': thisBooking.tableSelected,
+      'duration': parseInt(thisBooking.dom.hoursAmount.value),
+      'ppl': parseInt(thisBooking.dom.peopleAmount.value),
+      'starters': [],
+      'phone': parseInt(thisBooking.dom.phone.value),
+      'email': thisBooking.dom.email.value
+    };
   }
 
   updateDOM(){
@@ -137,11 +170,6 @@ class Booking {
     for(let table of thisBooking.dom.tables){
       let tableId = table.getAttribute(settings.booking.tableIdAttribute);
 
-      table.addEventListener('click', function(event){
-        event.preventDefault();
-        thisBooking.tableSelected = table.getAttribute('data-move');
-        console.log('data-move', thisBooking.tableSelected);
-      });
 
       if(!isNaN(tableId)){
         tableId = parseInt(tableId);
