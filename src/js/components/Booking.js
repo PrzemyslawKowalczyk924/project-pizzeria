@@ -90,11 +90,11 @@ class Booking {
     for(let item of eventsRepeat){
       if(item.repeat == 'daily'){
         for(let loopDate = minDate; loopDate <= maxDate; loopDate = utils.addDays(loopDate, 1)){
-          thisBooking.makeBooked(utils.dateToStr(loopDate), item.date, item.hour, item.duration, item.table);
+          thisBooking.makeBooked(utils.dateToStr(loopDate), item.hour, item.duration, item.table);
         }
       }
     }
-    //console.log('thisBooking.booked', thisBooking.booked);
+    console.log('thisBooking.booked', thisBooking.booked);
 
     thisBooking.updateDOM();
   }
@@ -161,7 +161,7 @@ class Booking {
         reservation.response = reservation.parsedResponse;
         console.log('response', reservation.response);
         /* execute initMenu method */
-        thisBooking.getData(reservation.response);
+        //thisBooking.makeBooked(reservation.response);
       });
 
     //console.log('thisApp.data', JSON.stringify(thisApp.data));
@@ -185,8 +185,6 @@ class Booking {
 
     for(let table of thisBooking.dom.tables){
       let tableId = table.getAttribute(settings.booking.tableIdAttribute);
-
-
       if(!isNaN(tableId)){
         tableId = parseInt(tableId);
       }
@@ -194,7 +192,7 @@ class Booking {
       if(
         !allAvaliable
         &&
-        thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId) > -1
+        thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId)
       ){
         table.classList.add(classNames.booking.tableBooked);
       } else {
