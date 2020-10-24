@@ -7,6 +7,7 @@ import HourPicker from './HourPicker.js';
 class Booking {
   constructor(element){
     const thisBooking = this;
+    thisBooking.tableSelected = [];
     thisBooking.render(element);
     thisBooking.initWidgets();
     thisBooking.getData();
@@ -140,31 +141,42 @@ class Booking {
     const url = settings.db.url + '/' + settings.db.booking;
 
     const reservation = {
-      'date': thisBooking.datePicker.value,
-      'hour': thisBooking.hourPicker.value,
-      'table': thisBooking.tableSelected,
-      'duration': parseInt(thisBooking.dom.hoursAmount.value),
-      'ppl': parseInt(thisBooking.dom.peopleAmount.value),
-      'starters': [],
-      'phone': parseInt(thisBooking.dom.phone.value),
-      'email': thisBooking.dom.email.value,
+      date: thisBooking.datePicker.value,
+      hour: thisBooking.hourPicker.value,
+      table: thisBooking.tableSelected,
+      duration: parseInt(thisBooking.dom.hoursAmount.value),
+      ppl: parseInt(thisBooking.dom.peopleAmount.value),
+      starters: [],
+      phone: parseInt(thisBooking.dom.phone.value),
+      email: thisBooking.dom.email.value,
     };
+    console.log('reservation', reservation);
+    /*for(let reservationElement of thisBooking.tableSelected){
+      let productData = reservationElement.getData();
+      reservation.tableSelected.push(productData);
+      console.log('elemofreservation', reservation.reservationElement);
+    }*/
 
-    fetch(url)
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(reservation),
+    };
+    fetch(url, options)
       .then(function(rawResponse){
         return rawResponse.json();
       })
       .then(function(parsedResponse){
-        console.log('parsedResponse', parsedResponse);
+        //thisBooking.updateDOM;
 
-        /* save parsedReposne as thisApp.data.products */
-        reservation.response = reservation.parsedResponse;
-        console.log('response', reservation.response);
-        /* execute initMenu method */
-        //thisBooking.makeBooked(reservation.response);
+        console.log('parsedResponse', parsedResponse);
+        //thisBooking.makeBooked();
       });
 
-    //console.log('thisApp.data', JSON.stringify(thisApp.data));
+    console.log('booked', thisBooking.booked);
+
   }
 
   updateDOM(){
