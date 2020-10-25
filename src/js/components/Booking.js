@@ -8,6 +8,7 @@ class Booking {
   constructor(element){
     const thisBooking = this;
     thisBooking.tableSelected = [];
+    thisBooking.starters = [];
     thisBooking.render(element);
     thisBooking.initWidgets();
     thisBooking.getData();
@@ -146,6 +147,20 @@ class Booking {
     }
   }
 
+  /*checkStarters(){
+    const thisBooking = this;
+
+    for(let starter of thisBooking.dom.tables){
+      table.addEventListener('click', function(event){
+
+        event.preventDefault();
+        table.classList.toggle(classNames.booking.tableBooked);
+        thisBooking.tableSelected = table.getAttribute(settings.booking.tableIdAttribute);
+        console.log('table Selected', thisBooking.tableSelected);
+      });
+    }
+  }*/
+
   sendOrder(){
     const thisBooking = this;
 
@@ -157,7 +172,7 @@ class Booking {
       table: parseInt(thisBooking.tableSelected),
       duration: parseInt(thisBooking.hoursAmount.value),
       ppl: parseInt(thisBooking.peopleAmount.value),
-      starters: [],
+      starters: parseInt(thisBooking.starters),
       phone: parseInt(thisBooking.dom.phone.value),
       email: thisBooking.dom.email.value,
     };
@@ -166,9 +181,10 @@ class Booking {
     console.log('reservation-table', reservation.table);
     console.log('reservation-duration', reservation.duration);
     console.log('reservation-ppl', reservation.ppl);
-    console.log('reservation-starter', reservation.starters);
+    console.log('reservation-starters', reservation.starters);
     console.log('reservation-phone', reservation.phone);
     console.log('reservation-email', reservation.email);
+
     for(let starter in thisBooking.dom.starters){
       if(starter.checked === true){
         console.log('elemofreservation', starter);
