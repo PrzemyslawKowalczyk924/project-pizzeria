@@ -8,16 +8,12 @@ class Booking {
   constructor(element){
     const thisBooking = this;
     thisBooking.tableSelected = [];
-    thisBooking.starters = [];
     thisBooking.render(element);
     thisBooking.initWidgets();
     thisBooking.getData();
     thisBooking.bookTable();
-    //thisBooking.sendOrder();
     thisBooking.makeReservation();
   }
-
-  //tableSelected;
 
   getData(){
     const thisBooking = this;
@@ -138,28 +134,14 @@ class Booking {
 
     for(let table of thisBooking.dom.tables){
       table.addEventListener('click', function(event){
-
         event.preventDefault();
-        table.classList.toggle(classNames.booking.tableBooked);
+        
+        table.classList.add(classNames.booking.tableBooked);
         thisBooking.tableSelected = table.getAttribute(settings.booking.tableIdAttribute);
         console.log('table Selected', thisBooking.tableSelected);
       });
     }
   }
-
-  /*checkStarters(){
-    const thisBooking = this;
-
-    for(let starter of thisBooking.dom.tables){
-      table.addEventListener('click', function(event){
-
-        event.preventDefault();
-        table.classList.toggle(classNames.booking.tableBooked);
-        thisBooking.tableSelected = table.getAttribute(settings.booking.tableIdAttribute);
-        console.log('table Selected', thisBooking.tableSelected);
-      });
-    }
-  }*/
 
   sendOrder(){
     const thisBooking = this;
@@ -172,22 +154,13 @@ class Booking {
       table: parseInt(thisBooking.tableSelected),
       duration: parseInt(thisBooking.hoursAmount.value),
       ppl: parseInt(thisBooking.peopleAmount.value),
-      starters: parseInt(thisBooking.starters),
+      starters: [],
       phone: parseInt(thisBooking.dom.phone.value),
       email: thisBooking.dom.email.value,
     };
-    console.log('reservation-date', reservation.date);
-    console.log('reservation-hour', reservation.hour);
-    console.log('reservation-table', reservation.table);
-    console.log('reservation-duration', reservation.duration);
-    console.log('reservation-ppl', reservation.ppl);
-    console.log('reservation-starters', reservation.starters);
-    console.log('reservation-phone', reservation.phone);
-    console.log('reservation-email', reservation.email);
 
-    for(let starter in thisBooking.dom.starters){
-      if(starter.checked === true){
-        console.log('elemofreservation', starter);
+    for(let starter of thisBooking.dom.starters){
+      if(starter.checked == true){
         reservation.starters.push(starter.value);
       }
     }
@@ -205,7 +178,8 @@ class Booking {
       })
       .then(function(parsedResponse){
         thisBooking.parsedResponse = {};
-
+        thisBooking.makeBooked(parsedResponse.date, parsedResponse.hour, parsedResponse.duration, parsedResponse.table);
+        thisBooking.updateDOM();
         console.log('parsedResponse', parsedResponse);
       });
 

@@ -69,7 +69,7 @@ export const select = {
     phone: '.order-confirmation .tel',
     email: '.order-confirmation .text',
     bookTable: '.order-confirmation button',
-    starters: '.booking-form [type="checkbox"]',
+    starters: '[name="starter"]',
   },
   nav: {
     links: '.main-nav a',
