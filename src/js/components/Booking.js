@@ -135,7 +135,7 @@ class Booking {
     for(let table of thisBooking.dom.tables){
       table.addEventListener('click', function(event){
         event.preventDefault();
-        
+
         table.classList.add(classNames.booking.tableBooked);
         thisBooking.tableSelected = table.getAttribute(settings.booking.tableIdAttribute);
         console.log('table Selected', thisBooking.tableSelected);

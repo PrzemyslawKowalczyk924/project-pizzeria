@@ -4,7 +4,8 @@ export const select = {
   templateOf: {
     menuProduct: '#template-menu-product',
     cartProduct: '#template-cart-product',
-    bookingWidget: '#template-booking-widget', //ADDED CODE
+    bookingWidget: '#template-booking-widget',
+    subpage: '#template-subpage',
   },
   containerOf: {
     menu: '#product-list',
@@ -138,6 +139,7 @@ export const settings = {
 export const templates = {
   menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
   cartProduct: Handlebars.compile(document.querySelector(select.templateOf.cartProduct).innerHTML),
-  //NEW CODE
   bookingWidget: Handlebars.compile(document.querySelector(select.templateOf.bookingWidget).innerHTML),
+  //MY CODE
+  subpage: Handlebars.compile(document.querySelector(select.templateOf.subpage).innerHTML),
 };
