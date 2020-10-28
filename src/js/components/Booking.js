@@ -136,7 +136,15 @@ class Booking {
       table.addEventListener('click', function(event){
         event.preventDefault();
 
-        table.classList.add(classNames.booking.tableBooked);
+        const tableChosen = thisBooking.dom.wrapper.querySelector(select.booking.tableChosen);
+        if (tableChosen) {
+          tableChosen.classList.remove(classNames.booking.tableChosen);
+        }
+        if (table.classList.contains(classNames.booking.tableBooked)){
+          alert('this table is already booked');
+          return false;
+        }
+        table.classList.add(classNames.booking.tableChosen);
         thisBooking.tableSelected = table.getAttribute(settings.booking.tableIdAttribute);
         console.log('table Selected', thisBooking.tableSelected);
       });
@@ -189,6 +197,12 @@ class Booking {
 
   updateDOM(){
     const thisBooking = this;
+
+    const tableChosen = thisBooking.dom.wrapper.querySelector(select.booking.tableChosen);
+    if (tableChosen) {
+      tableChosen.classList.remove(classNames.booking.tableChosen);
+    }
+    thisBooking.tableSelected = null;
 
     thisBooking.date = thisBooking.datePicker.value;
     thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);

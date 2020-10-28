@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Pizzeria</title>
+  <link rel="stylesheet" href="vendor/bootstrap-grid.css">
   <link href="https://fonts.googleapis.com/css?family=Lato:400,300i,700%7COswald:300,500,700&amp;subset=latin-ext" rel="stylesheet">
   <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -64,7 +65,26 @@
 
   <div id="pages">
     <section id="home">
-      <div id="home-wrapper" class="home-wrapper container"></div>
+      <div class="home-wrapper container">
+          <div class="link-wrapper">
+            <div class="box-wrapper link-order">
+              <a href="#order" class="link">
+
+                <h1 class="h1">ORDER ONLINE</h5>
+              </a>
+            </div>
+            <div class="box-wrapper link-book">
+              <a href="#booking" class="link">
+                <img class="link-img" src="images/home/pizza-2.jpg">
+                <h1 class="h1">BOOK TABLE</h5>
+              </a>
+            </div>
+          </div>
+          <div class="box">
+            <div class="description">
+              OPENING HOURS: <br><p>TUE-SUN, 12PM-12AM</p></div>
+          </div>
+      </div>
     </section>
     <section id="order">
       <div id="product-list" class="product-list container"></div>
@@ -73,14 +93,6 @@
       <div class="booking-wrapper container"></div>
     </section>
   </div>
-
-  <script id="template-home-page" type="text/x-handlebars-template">
-    <article>
-      <div>ORDER ONLINE</div>
-      <div>BOOK TABLE</div>
-      <div>OPENING HOURS: <p>TUE-SUN, 12PM-12AM</p></div>
-    </article>
-  </script>
 
   <script id="template-booking-widget" type="text/x-handlebars-template">
     <div class="booking-widget">

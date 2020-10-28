@@ -2,7 +2,6 @@ import {settings, select, classNames} from './settings.js';
 import Product from './components/Product.js';
 import Cart from './components/Cart.js';
 import Booking from './components/Booking.js';
-import HomePage from './components/HomePage.js';
 
 const app = {
   initPages: function(){
@@ -109,10 +108,8 @@ const app = {
   },
 
   initHomePage: function(){
-    const thisApp = this;
+    //const thisApp = this;
 
-    const homeElem = document.querySelector(select.templateOf.homePage);
-    thisApp.homePage = new HomePage(homeElem);
   },
 
   init: function(){

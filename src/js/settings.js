@@ -5,7 +5,6 @@ export const select = {
     menuProduct: '#template-menu-product',
     cartProduct: '#template-cart-product',
     bookingWidget: '#template-booking-widget',
-    homePage: '#template-home-page',
   },
   containerOf: {
     menu: '#product-list',
@@ -71,6 +70,7 @@ export const select = {
     email: '.order-confirmation .text',
     bookTable: '.order-confirmation button',
     starters: '[name="starter"]',
+    tableChosen: '.table.chosen',
   },
   nav: {
     links: '.main-nav a',
@@ -90,6 +90,7 @@ export const classNames = {
   booking: {
     loading: 'loading',
     tableBooked: 'booked',
+    tableChosen: 'chosen',
   },
   nav: {
     active: 'active',
@@ -140,6 +141,4 @@ export const templates = {
   menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
   cartProduct: Handlebars.compile(document.querySelector(select.templateOf.cartProduct).innerHTML),
   bookingWidget: Handlebars.compile(document.querySelector(select.templateOf.bookingWidget).innerHTML),
-  //MY CODE
-  homePage: Handlebars.compile(document.querySelector(select.templateOf.homePage).innerHTML),
 };
