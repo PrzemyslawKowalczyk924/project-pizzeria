@@ -15,20 +15,38 @@
 
 .box-wrapper {
   order: 0;
-  flex: 1 0 auto;
+  flex: 1 0 49%;
   align-self: auto;
+  margin: 2px;
 }
 
 .h1 {
   text-align: center;
-  order: 0;
-  flex: 1 0 auto;
-  align-self: auto;
+  color: white;
 }
 
-.link-img {
+.link-order {
+  background-image: url("/images/home/pizza-1.jpg");
   width: 100%;
-  height: 50%;
+  height: 100px;
   object-fit: cover;
   display: block;
+}
+
+.link-book {
+  background-image: url("/images/home/pizza-2.jpg");
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  display: block;
+}
+
+.box-opening {
+  height: 50%;
+  color: white;
+  background-color: $color-main;
+  order: 0;
+  flex: 0 0 100%;
+  align-self: auto;
+  text-align: center;
 }
