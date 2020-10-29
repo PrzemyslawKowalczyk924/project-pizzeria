@@ -114,7 +114,7 @@ const app = {
 
   init: function(){
     const thisApp = this;
-    thisApp.initHomePage();
+    //thisApp.initHomePage();
     thisApp.initPages();
     thisApp.initData();
     thisApp.initCart();
