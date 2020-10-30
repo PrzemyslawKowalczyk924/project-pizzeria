@@ -9,6 +9,7 @@ const app = {
 
     thisApp.pages = document.querySelector(select.containerOf.pages).children;
     thisApp.navLinks = document.querySelectorAll(select.nav.links);
+    thisApp.homeLinks = document.querySelectorAll('.link-wrapper a');
 
     const idFromHash = window.location.hash.replace('#/', '');
 
@@ -18,6 +19,18 @@ const app = {
       if(page.id == idFromHash){
         pageMachingHash = page.id;
       }
+    }
+
+    for(let homeLink of thisApp.homeLinks){
+      homeLink.addEventListener('click', function(event){
+        const clickedElement = this;
+        event.preventDefault();
+
+        const pageId = clickedElement.getAttribute('href').replace('#', '');
+        thisApp.activatePage(pageId);
+        homeLink.classList.add('active');
+        console.log('page listener', thisApp.activatePage);
+      });
     }
 
     thisApp.activatePage(pageMachingHash);

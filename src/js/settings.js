@@ -74,8 +74,12 @@ export const select = {
   },
   nav: {
     links: '.main-nav a',
+    home: '.link-wrapper a',
   },
   //CODE ADDED END
+  homeLinks: {
+    wrapper: '.link-wrapper a',
+  },
 };
 
 export const classNames = {
