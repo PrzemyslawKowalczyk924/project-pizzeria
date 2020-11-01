@@ -153,8 +153,6 @@ class Booking {
     }
   }
 
-  
-
   checkForOvercome(table){
     const thisBooking = this;
 
@@ -175,7 +173,7 @@ class Booking {
 
     for (let timePeriod = thisHour; timePeriod < thisHour + thisBooking.hoursAmount.value; timePeriod += 0.5){
 
-      if(tableId == thisBooking.booked.value){
+      if(thisBooking.booked[thisBooking.date][timePeriod].includes(tableId)){
         bookingButton.disabled = true;
         alert('This table is already booked at this duration of time. Please change your booking time');
       }
