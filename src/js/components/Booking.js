@@ -110,7 +110,6 @@ class Booking {
     const startHour = utils.hourToNumber(hour);
 
     for(let hourBlock = startHour; hourBlock < startHour + duration; hourBlock += 0.5){
-      //console.log('loop', hourBlock);
 
       if(typeof thisBooking.booked[date][hourBlock] == 'undefined'){
         thisBooking.booked[date][hourBlock] = [];
@@ -133,6 +132,7 @@ class Booking {
     const thisBooking = this;
 
     for(let table of thisBooking.dom.tables){
+
       table.addEventListener('click', function(event){
         event.preventDefault();
 
@@ -146,9 +146,41 @@ class Booking {
         }
         table.classList.add(classNames.booking.tableChosen);
         thisBooking.tableSelected = table.getAttribute(settings.booking.tableIdAttribute);
+        thisBooking.checkForOvercome(table);
+        console.log('overload', thisBooking.checkForOvercome.value);
         console.log('table Selected', thisBooking.tableSelected);
       });
     }
+  }
+
+  
+
+  checkForOvercome(table){
+    const thisBooking = this;
+
+    //New code for max duration
+    const maxDuration = 24 - utils.hourToNumber(thisBooking.hourPicker.value);
+    const bookingButton = document.querySelector('#booking-button');
+    const thisHour = utils.hourToNumber(thisBooking.hourPicker.value);
+    console.log('button', bookingButton);
+
+    if(thisBooking.hoursAmount.value > maxDuration){
+      console.log('godzina!!!', thisBooking.hoursAmount.value);
+      bookingButton.disabled = true;
+      alert('Sorry your duration time is to long, at this hour our restaurant is locked. Please chose other hour');
+    }
+
+    const tableNumber = table.getAttribute(settings.booking.tableIdAttribute);
+    const tableId = parseInt(tableNumber);
+
+    for (let timePeriod = thisHour; timePeriod < thisHour + thisBooking.hoursAmount.value; timePeriod += 0.5){
+
+      if(tableId == thisBooking.booked.value){
+        bookingButton.disabled = true;
+        alert('This table is already booked at this duration of time. Please change your booking time');
+      }
+    }
+
   }
 
   sendOrder(){
