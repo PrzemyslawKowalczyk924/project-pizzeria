@@ -120,13 +120,14 @@
   }
 
   input[type="number"] {
+    width: 55px;
     text-align: center;
     -moz-appearance: textfield;
     padding-left: 12px;
   }
 
   input[type="number"]:focus {
-    width: 50px;
+    width: 60px;
   }
 
 }
