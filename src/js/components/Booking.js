@@ -130,11 +130,13 @@ class Booking {
 
   bookTable(){
     const thisBooking = this;
+    const bookingButton = document.querySelector('#booking-button');
 
     for(let table of thisBooking.dom.tables){
 
       table.addEventListener('click', function(event){
         event.preventDefault();
+        bookingButton.disabled = false;
 
         const tableChosen = thisBooking.dom.wrapper.querySelector(select.booking.tableChosen);
         if (tableChosen) {
@@ -147,7 +149,7 @@ class Booking {
         table.classList.add(classNames.booking.tableChosen);
         thisBooking.tableSelected = table.getAttribute(settings.booking.tableIdAttribute);
         thisBooking.checkForOvercome(table);
-        console.log('overload', thisBooking.checkForOvercome.value);
+        //console.log('overload', thisBooking.checkForOvercome(table));
         console.log('table Selected', thisBooking.tableSelected);
       });
     }
@@ -160,9 +162,8 @@ class Booking {
     const maxDuration = 24 - utils.hourToNumber(thisBooking.hourPicker.value);
     const bookingButton = document.querySelector('#booking-button');
     const thisHour = utils.hourToNumber(thisBooking.hourPicker.value);
-    console.log('button', bookingButton);
 
-    if(thisBooking.hoursAmount.value > maxDuration){
+    if (thisBooking.hoursAmount.value > maxDuration){
       console.log('godzina!!!', thisBooking.hoursAmount.value);
       bookingButton.disabled = true;
       alert('Sorry your duration time is to long, at this hour our restaurant is locked. Please chose other hour');
@@ -176,6 +177,7 @@ class Booking {
       if(thisBooking.booked[thisBooking.date][timePeriod].includes(tableId)){
         bookingButton.disabled = true;
         alert('This table is already booked at this duration of time. Please change your booking time');
+        break;
       }
     }
 
@@ -227,6 +229,8 @@ class Booking {
 
   updateDOM(){
     const thisBooking = this;
+    const bookingButton = document.querySelector('#booking-button');
+    bookingButton.disabled = false;
 
     const tableChosen = thisBooking.dom.wrapper.querySelector(select.booking.tableChosen);
     if (tableChosen) {

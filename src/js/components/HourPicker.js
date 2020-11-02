@@ -17,11 +17,13 @@ class HourPicker extends BaseWidget {
 
   initPlugin(){
     const thisWidget = this;
+    //const bookingButton = document.querySelector('#booking-button');
 
     rangeSlider.create(thisWidget.dom.input);
 
     thisWidget.dom.input.addEventListener('input', function(){
       thisWidget.value = thisWidget.dom.input.value;
+      //bookingButton.disabled = false;
     });
   }
 
