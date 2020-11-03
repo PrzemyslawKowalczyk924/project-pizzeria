@@ -1,1 +1,1 @@
-https://git.heroku.com/allaboutpizza.git
+ https://allaboutpizza.herokuapp.com
